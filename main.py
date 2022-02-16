@@ -9,13 +9,14 @@ try:
 except ImportError:
     android = None
 
-screen_size = [360, 600]
+screen_size = [800, 600]
 screen = pygame.display.set_mode(screen_size)
 
 # get current path for assets
 current_path = os.path.dirname(__file__)
 
 background = pygame.image.load(os.path.join(current_path, 'data/background.png'))
+background = pygame.transform.scale(background,(800,600))
 spaceship = pygame.image.load(os.path.join(current_path, 'data/spaceship.png'))
 bullet = pygame.image.load(os.path.join(current_path, 'data/bullet.png'))
 bullet_y = 500
@@ -49,12 +50,12 @@ while keep_alive:
             bullet_y = 500
 
     screen.blit(background, [0, 0])
-    screen.blit(bullet, [180, bullet_y])
-    screen.blit(spaceship, [160, 500])
+    screen.blit(bullet, [420, bullet_y])
+    screen.blit(spaceship, [400, 500])
 
     if move_direction == 'right':
         planet_x = planet_x + 5
-        if planet_x == 300:
+        if planet_x == 800:
             move_direction = 'left'
     else:
         planet_x = planet_x - 5
@@ -63,7 +64,7 @@ while keep_alive:
 
     screen.blit(planet, [planet_x, 50])
 
-    if bullet_y < 80 and 120 < planet_x < 180:
+    if bullet_y < 80 and 380 < planet_x < 460:
         p_index = p_index + 1
         if p_index < len(planets):
             planet = pygame.image.load(planets[p_index])
